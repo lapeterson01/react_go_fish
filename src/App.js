@@ -1,25 +1,31 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import LoginView from './LoginView'
+import GameView from './GameView'
+import Game from './Game'
 import './App.css';
 
 class App extends Component {
+  constructor() {
+    super()
+    this.state = {}
+  }
+
+  onLogin(values) {
+    const game = new Game(values.name, values.botCount)
+    this.setState({ game: game })
+  }
+
   render() {
+    let view
+    if (this.state.game) {
+      view = <GameView game={this.state.game} />
+    } else {
+      view = <LoginView onLogin={this.onLogin.bind(this)} />
+    }
+
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        {view}
       </div>
     );
   }
