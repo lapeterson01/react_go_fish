@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 class LoginView extends Component {
   constructor() {
     super()
-    this.state = { value: '' }
+    this.state = { name: '', botCount: '' }
 
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -20,6 +20,7 @@ class LoginView extends Component {
   }
 
   handleChange(event) {
+    debugger
     if (event.target.name === 'name') {
       this.setState({ name: event.target.value })
     } else if (event.target.name === 'botCount') {

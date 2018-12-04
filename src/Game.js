@@ -14,7 +14,7 @@ class Game {
   }
 
   playRound(playerName, rank) {
-    const selectedPlayer = this.playerByName([playerName])
+    const selectedPlayer = this.playerByName(playerName)
     if (selectedPlayer.hasRank(rank)) {
       const retrievedCards = this._giveCardsToCurrentPlayer(selectedPlayer, rank)
       this._gatherRoundInfo(selectedPlayer, retrievedCards)
