@@ -5,8 +5,8 @@ class CardDeck {
     this._cards = this._createDeck()
   }
 
-  static ranks() { return ['A', 'K', 'Q', 'J', '10', '9', '8', '7', '6', '5', '4', '3', '2'] }
-  static suits() { return ['S', 'C', 'D', 'H'] }
+  static RANKS = ['A', 'K', 'Q', 'J', '10', '9', '8', '7', '6', '5', '4', '3', '2']
+  static SUITS = ['S', 'C', 'D', 'H']
 
   cards() {
     return this._cards
@@ -35,8 +35,8 @@ class CardDeck {
   }
 
   _createDeck() {
-    return CardDeck.ranks().flatMap((rank) => {
-      return CardDeck.suits().map(suit => new PlayingCard(rank, suit))
+    return CardDeck.RANKS.flatMap((rank) => {
+      return CardDeck.SUITS.map(suit => new PlayingCard(rank, suit))
     })
   }
 }

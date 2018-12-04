@@ -14,5 +14,5 @@ it('calls passed in function logged in player name', () => {
     name: 'botCount'
   }})
   wrapper.find('form').simulate('submit', { preventDefault: () => {} })
-  expect(onLogin).toBeCalledWith({name: 'Test', botCount: 2})
+  expect(onLogin).toBeCalledWith('Test', 2)
 })

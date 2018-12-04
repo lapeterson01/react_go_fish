@@ -5,9 +5,6 @@ class LoginView extends Component {
   constructor() {
     super()
     this.state = { name: '', botCount: '' }
-
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleChange = this.handleChange.bind(this)
   }
 
   static propTypes = {
@@ -16,26 +13,22 @@ class LoginView extends Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    this.props.onLogin(this.state)
+    const { name, botCount } = this.state
+    this.props.onLogin(name, botCount)
   }
 
-  handleChange(event) {
-    debugger
-    if (event.target.name === 'name') {
-      this.setState({ name: event.target.value })
-    } else if (event.target.name === 'botCount') {
-      this.setState({ botCount: event.target.value })
-    }
+  handleChange(key, value) {
+    this.setState(() => { return { [key]: value } })
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={(e) => this.handleSubmit(e)}>
         <label htmlFor="name">Name</label>
-        <input className="login-name" type="text" name="name" value={this.state.className} onChange={this.handleChange} />
+        <input className="login-name" type="text" name="name" value={this.state.className} onChange={(e) => this.handleChange('name', e.target.value)} />
 
         <label htmlFor="botCount">How Many Bots?</label>
-        <select className="botCount" name="botCount" value={this.state.botCount} onChange={this.handleChange}>
+        <select className="botCount" name="botCount" value={this.state.botCount} onChange={(e) => this.handleChange('botCount', e.target.value)}>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
