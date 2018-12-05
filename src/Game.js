@@ -1,5 +1,6 @@
 import CardDeck from './CardDeck'
 import PlayerList from './PlayerList'
+import RoundResult from './RoundResult'
 
 class Game {
   constructor(playerName, numberOfBots, deck = new CardDeck()) {
@@ -17,10 +18,9 @@ class Game {
     const selectedPlayer = this.playerByName(playerName)
     if (selectedPlayer.hasRank(rank)) {
       const retrievedCards = this._giveCardsToCurrentPlayer(selectedPlayer, rank)
-      this._gatherRoundInfo(selectedPlayer, retrievedCards)
+      this._setRoundResult(retrievedCards, selectedPlayer)
     } else {
-      const retrievedCards = [this._drawFromDeck()]
-      this._gatherRoundInfo({ name: function() { return 'deck' } }, retrievedCards)
+      this._setRoundResult([this._drawFromDeck()])
       this._nextPlayerTurn()
     }
     this._calculateBooks()
@@ -115,23 +115,17 @@ class Game {
     return this.playerList().calculateWinner()
   }
 
-  _gatherRoundInfo(cardSource, cards) {
-    const currentPlayer = this.currentPlayer()
-    const humanPlayer = this.humanPlayer()
-    this._roundInfo = {
-      currentPlayer: function() {
-        return currentPlayer === humanPlayer ? 'You' : currentPlayer.name()
-      },
-      cardsReceived: cards.map(card => card.toString()).join(', '),
-      requestedPlayer: function() {
-        return cardSource === humanPlayer ? 'you' : cardSource.name()
-      }
-    }
+  _setRoundResult(cards, target) {
+    this._roundResult = new RoundResult(this.currentPlayer(), cards, target)
   }
 
-  roundInfo() {
-    if (!this._roundInfo) this._roundInfo = null
-    return this._roundInfo
+  roundResultObject() {
+    if (!this._roundResult) this._roundResult = { toString: () => '' }
+    return this._roundResult
+  }
+
+  roundResult() {
+    return this.roundResultObject().toString()
   }
 }
 

@@ -3,7 +3,7 @@ import LoginView from './LoginView'
 import GameView from './GameView'
 import Game from './Game'
 import Bot from './Bot'
-import './App.css';
+// import './App.css';
 
 class App extends Component {
   constructor() {

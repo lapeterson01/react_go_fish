@@ -36,12 +36,12 @@ class GameView extends Component {
     const opponents = game.allPlayersExcept(game.humanPlayer  ().name())
     let playRoundButton
     if (game.currentPlayer() === game.humanPlayer()) {
-      playRoundButton = <input type="submit" value="Play!" />
+      playRoundButton = <h4 className="message">It is your turn</h4>
     } else {
       playRoundButton = (
         <div>
-          <h6>It is {game.currentPlayer().name()}'s turn</h6>
-          <button onClick={this.playRound.bind(this)}>{game.currentPlayer().name()} Play!</button>
+          <h4 className="message">It is {game.currentPlayer().name()}'s turn</h4>
+          <button className="playRound" onClick={this.playRound.bind(this)}>{game.currentPlayer().name()} Play!</button>
         </div>
       )
     }
@@ -49,8 +49,9 @@ class GameView extends Component {
     return (
       <form onSubmit={this.playRound.bind(this)}>
         <OpponentListView opponents={opponents} setPlayer={this.setPlayer.bind(this)} selectedPlayer={this.state.selectedPlayer} />
-        <div>Deck: {game.deck().count()}</div>
-        <PlayerView player={game.humanPlayer()} playRound={this.playRound.bind(this)} setRank={this.setRank.bind(this)} />
+        <div className="table">Deck: {game.deck().count()}</div>
+        <PlayerView game={game} playRound={this.playRound.bind(this)} setRank={this.setRank.bind(this)} />
+        <div className="message">{game.roundResult()}</div>
         {playRoundButton}
       </form>
     )

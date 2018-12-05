@@ -3,30 +3,47 @@ import PropTypes from 'prop-types'
 
 class PlayerView extends Component {
   static propTypes = {
-    player: PropTypes.object.isRequired,
+    game: PropTypes.object.isRequired,
     setRank: PropTypes.func.isRequired,
     playRound: PropTypes.func.isRequired
   }
 
+  player() {
+    return this.props.game.humanPlayer()
+  }
+
+  currentPlayer() {
+    return this.props.game.currentPlayer()
+  }
+
   render() {
-    const hand = this.props.player.hand().map((card, index) =>
-      <div key={index}>
-        <button type="submit" key={index} value={card.rank()} onClick={this.props.setRank}>
+    let hand
+    if (this.player() === this.currentPlayer()) {
+      hand = this.player().hand().map((card, index) =>
+        <div className="game-list-item" key={index}>
+          <button type="submit" key={index} value={card.rank()} onClick={this.props.setRank}>
+            {card.toString()}
+          </button>
+        </div>
+      )
+    } else {
+      hand = this.player().hand().map((card, index) =>
+        <div className="game-list-item" key={index}>
           {card.toString()}
-        </button>
-      </div>
-    )
+        </div>
+      )
+    }
 
     return (
-      <div>
+      <div className="player">
         <div>
-          {this.props.player.name()}
+          {this.player().name()}
         </div>
-        <div>
+        <div className="playerHand">
           {hand}
         </div>
         <div>
-          Books: {this.props.player.books()}
+          Books: {this.player().books()}
         </div>
       </div>
     )

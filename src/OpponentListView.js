@@ -10,7 +10,7 @@ class OpponentListView extends Component {
 
   render() {
     const opponentList = this.props.opponents.map((opponent, index) =>
-      <div key={index}>
+      <div className="game-list-item" key={index}>
         <input type="radio" value={opponent.name()} name="opponent" checked={this.props.selectedPlayer === opponent.name()} onClick={this.props.setPlayer} />
         <div>{opponent.name()}</div>
         <div>Cards: {opponent.countHand()}</div>
@@ -19,7 +19,7 @@ class OpponentListView extends Component {
     )
 
     return (
-      <div>
+      <div className="opponentList">
         {opponentList}
       </div>
     )

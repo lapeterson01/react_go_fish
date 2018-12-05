@@ -1,0 +1,39 @@
+.playerHand, .opponentList {
+  display: flex;
+  flex-direction: row;
+}
+
+.table {
+  margin: 50px;
+  width: 25%;
+  text-align: center;
+  border: 1px solid black;
+  height: 50px;
+  border-radius: 25px;
+}
+
+.message {
+  margin-left: 30px;
+  margin-bottom: 15px;
+}
+
+.playRound {
+  width: 25%;
+  text-align: center;
+}
+
+.player {
+  display: inline-block;
+  text-align: center;
+  border: 1px solid black;
+  margin: 30px;
+}
+
+.game-list-item {
+  margin: 5px;
+  text-align: center;
+  cursor: pointer;
+  display: block;
+  border: 1px solid black;
+  width: 50px
+}

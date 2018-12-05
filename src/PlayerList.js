@@ -2,7 +2,7 @@ import Player from './Player'
 
 class PlayerList {
   constructor(playerName, numberOfBots) {
-    this._player = new Player(playerName)
+    this._player = Player.asHuman(playerName)
     this.createBots(numberOfBots)
   }
 
